@@ -3,7 +3,7 @@
 //  opencv_nonlinearFilterTest
 //
 //  Created by ZHHJemotion on 2016/10/12.
-//  Copyright Â© 2016å¹´ Lukas_Zhang. All rights reserved.
+//  Copyright ı 2016Äê Lukas_Zhang. All rights reserved.
 //
 
 #include <iostream>
@@ -18,21 +18,21 @@ using namespace std;
 #define PATH string("/Users/zhangxingjian/Desktop/Programming/C++/OpenCV/opencv_test7/opencv_unlinearFilterTest/opencv_unlinearFilterTest/")
 
 // =================================== global varibales declaration section ======================
-//    Describe: global varibales å…¨å±€å˜é‡
+//    Describe: global varibales È«¾Ö±äÁ¿
 // ========================================================================================
 Mat srcImage, dstImage1, dstImage2, dstImage3;
-int medianBlurValue = 5; //ä¸­å€¼æ»¤æ³¢å‚æ•°å€¼
-int bilateralFilterValue = 10; //åŒè¾¹æ»¤æ³¢å‚è€ƒå€¼
-int gaussianBlurValue = 6; //é«˜æ–¯æ»¤æ³¢å†…æ ¸å€¼
+int medianBlurValue = 5; //ÖĞÖµÂË²¨²ÎÊıÖµ
+int bilateralFilterValue = 10; //Ë«±ßÂË²¨²Î¿¼Öµ
+int gaussianBlurValue = 6; //¸ßË¹ÂË²¨ÄÚºËÖµ
 
 
 // ================================== global function declaration section ==========================
 //    Describe: global function
 // =============================================================================================
-// the callback function of TrackBar --- è½¨è¿¹æ¡å›è°ƒå‡½æ•°
-static void onMedianBlur(int, void *);  //ä¸­å€¼æ»¤æ³¢
-static void onBilateralFilter(int, void *);  //åŒè¾¹æ»¤æ³¢
-static void onGaussianBlur(int, void *); //é«˜æ–¯æ»¤æ³¢
+// the callback function of TrackBar --- ¹ì¼£Ìõ»Øµ÷º¯Êı
+static void onMedianBlur(int, void *);  //ÖĞÖµÂË²¨
+static void onBilateralFilter(int, void *);  //Ë«±ßÂË²¨
+static void onGaussianBlur(int, void *); //¸ßË¹ÂË²¨
 
 
 // ================================== main() function ===================================
@@ -43,39 +43,39 @@ int main(int argc, const char * argv[]) {
     
     system("color 5E");
     
-    // read the original image è½½å…¥åŸå›¾
+    // read the original image ÔØÈëÔ­Í¼
     srcImage = imread(PATH+string("1.jpg"),1);
-    // exception handling å¼‚å¸¸å¤„ç†
+    // exception handling Òì³£´¦Àí
     if(!srcImage.data) {printf("Errpr: we can't read the image 1.jpg!"); return false;}
     
-    // å…‹éš†åŸå›¾åˆ°Matç±»å‹ä¸­
+    // ¿ËÂ¡Ô­Í¼µ½MatÀàĞÍÖĞ
     dstImage1 = srcImage.clone();
     dstImage2 = srcImage.clone();
     dstImage3 = srcImage.clone();
     
-    // show the original image æ˜¾ç¤ºåŸå›¾
+    // show the original image ÏÔÊ¾Ô­Í¼
     namedWindow("the original image");
     imshow("the original image", srcImage);
     
-    // ---------------------------- Median Blur ä¸­å€¼æ»¤æ³¢ --------------------------------
-    // create a new window åˆ›å»ºçª—å£
+    // ---------------------------- Median Blur ÖĞÖµÂË²¨ --------------------------------
+    // create a new window ´´½¨´°¿Ú
     namedWindow("the median blur image");
-    // create a TrackBar åˆ›å»ºè½¨è¿¹æ¡
-    createTrackbar("å‚æ•°å€¼", "the median blur image", &medianBlurValue, 50, onMedianBlur);
+    // create a TrackBar ´´½¨¹ì¼£Ìõ
+    createTrackbar("²ÎÊıÖµ", "the median blur image", &medianBlurValue, 50, onMedianBlur);
     onMedianBlur(medianBlurValue, 0);
     
-    // ---------------------------- Bilateral Filter åŒè¾¹æ»¤æ³¢ ---------------------------
-    // create a new window åˆ›å»ºçª—å£
+    // ---------------------------- Bilateral Filter Ë«±ßÂË²¨ ---------------------------
+    // create a new window ´´½¨´°¿Ú
     namedWindow("the bilateral filter image");
-    // create a TrackBar åˆ›å»ºè½¨è¿¹æ¡
-    createTrackbar("å‚æ•°å€¼", "the bilateral filter image", &bilateralFilterValue, 50, onBilateralFilter);
+    // create a TrackBar ´´½¨¹ì¼£Ìõ
+    createTrackbar("²ÎÊıÖµ", "the bilateral filter image", &bilateralFilterValue, 50, onBilateralFilter);
     onBilateralFilter(bilateralFilterValue, 0);
     
-    // ---------------------------- Gaussian Blur é«˜æ–¯æ»¤æ³¢ ------------------------------
-    // create a new window åˆ›å»ºçª—å£
+    // ---------------------------- Gaussian Blur ¸ßË¹ÂË²¨ ------------------------------
+    // create a new window ´´½¨´°¿Ú
     namedWindow("the gaussian blur image");
-    // create a TrackBar åˆ›å»ºè½¨è¿¹æ¡
-    createTrackbar("å†…æ ¸å€¼", "the gaussian blur image", &gaussianBlurValue, 40, onGaussianBlur);
+    // create a TrackBar ´´½¨¹ì¼£Ìõ
+    createTrackbar("ÄÚºËÖµ", "the gaussian blur image", &gaussianBlurValue, 40, onGaussianBlur);
     onGaussianBlur(gaussianBlurValue, 0);
     
     // output some helpful infomation
@@ -85,7 +85,22 @@ int main(int argc, const char * argv[]) {
     while (char(waitKey(1)) != 'q') {}
     
     // ========================================================================================
-    // Bilateral Filter without TrackBar æ— è½¨è¿¹æ¡çš„åŒè¾¹æ»¤æ³¢
+    // Bilateral Filter without TrackBar ÎŞ¹ì¼£ÌõµÄË«±ßÂË²¨
+    Mat image = imread(PATH+string("1.jpg"),1);
+    if (!image.data) {
+        printf("Error: there is a error in reading the image 1.jpg! \n");
+        return false;
+    }
+    
+    namedWindow("Ô­Í¼");
+    imshow("Ô­Í¼",image);
+    
+    Mat output;
+    namedWindow("Ğ§¹ûÍ¼");
+    bilateralFilter(image, output, 25, 25*2, 25/2);
+    imshow("Ğ§¹ûÍ¼", output);
+    
+    waitKey(0);
     
     
     return 0;
@@ -94,7 +109,7 @@ int main(int argc, const char * argv[]) {
 
 
 // ============================ onMedianBlur() Funciton ===============================
-//    Describe: the callback of the median blur ä¸­å€¼æ»¤æ³¢çš„å›è°ƒå‡½æ•°
+//    Describe: the callback of the median blur ÖĞÖµÂË²¨µÄ»Øµ÷º¯Êı
 // ====================================================================================
 static void onMedianBlur(int, void *)
 {
@@ -105,7 +120,7 @@ static void onMedianBlur(int, void *)
 
 
 // =========================== onBilatereaFilter() Function ==========================
-//    Describe: the callback of the bilateral filter åŒè¾¹æ»¤æ³¢çš„å›è°ƒå‡½æ•°
+//    Describe: the callback of the bilateral filter Ë«±ßÂË²¨µÄ»Øµ÷º¯Êı
 // ===================================================================================
 static void onBilateralFilter(int, void *)
 {
@@ -116,7 +131,7 @@ static void onBilateralFilter(int, void *)
 
 
 // =========================== onGaussianBlur() Function ============================
-//    Describe: the callback of the guassian blur é«˜æ–¯æ»¤æ³¢çš„å›è°ƒå‡½æ•°
+//    Describe: the callback of the guassian blur ¸ßË¹ÂË²¨µÄ»Øµ÷º¯Êı
 // ==================================================================================
 static void onGaussianBlur(int, void *)
 {
